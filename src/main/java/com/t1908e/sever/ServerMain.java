@@ -17,7 +17,10 @@ public class ServerMain {
 
         String sentence_from_client;
         String sentence_to_client;
+
         try {
+            Map<String, Object> keys = CypherUtil.getRSAKeys();
+            PrivateKey privateKey = (PrivateKey) keys.get("private");
 
             ServerSocket chatSocket = new ServerSocket(8080);
 
@@ -35,10 +38,8 @@ public class ServerMain {
                         new DataOutputStream(connectionSocket.getOutputStream());
 
                 sentence_from_client = inFromClient.readLine();
-                System.out.println("Client sent: " + sentence_from_client);
-                //decrypt
-                Map<String, Object> keys = CypherUtil.getRSAKeys();
-                PrivateKey privateKey = (PrivateKey) keys.get("private");
+                System.out.println("Client sent: " + sentence_from_client); //decryped text
+
                 String plainMsg = CypherUtil.decryptMessage(sentence_from_client, privateKey);
                 sentence_to_client = clientIP + " said: " + plainMsg + '\n';
                 outToClient.writeBytes(sentence_to_client);

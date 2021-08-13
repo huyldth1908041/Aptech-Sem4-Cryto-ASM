@@ -26,7 +26,6 @@ public class ClientMain {
             Map<String, Object> keys = CypherUtil.getRSAKeys();
             PublicKey publicKey = (PublicKey) keys.get("public");
             sentence_to_server = CypherUtil.encryptMessage(plainMsg, publicKey);
-
             Socket clientSocket = new Socket("127.0.0.1", 8080);
 
             DataOutputStream outToServer =
