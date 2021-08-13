@@ -1,4 +1,4 @@
-# Aptech-Sem4-Cryto-ASM
+# Aptech Sem4 Cryto ASM
 
 Simple implementation of RSA asymmetric algorithms with java socket
 
